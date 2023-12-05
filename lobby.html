@@ -6,6 +6,10 @@
   <link rel="stylesheet" href="lobby.css">
 </head>
 <body>
+<div id="gamediv">
+    <h1>Game</h1>
+</div>
+<div id = "lobbydiv">
   <h1>Lobby</h1>
 
   <div id="peer-id"></div>
@@ -16,20 +20,38 @@
     <button type="submit">Set Nickname</button>
   </form>
 
+  <button id="start-game">Start Game</button>
+
   <form id="gameid-form">
     <label for="gameid">Enter game ID:</label>
     <input type="text" id="gameid" name="gameid" required>
-    <button type="submit">Join Game</button>
+    <button id="join-game" disabled>Join Game</button>
   </form>
 
-  <div id="chat-box" style="height: 300px; overflow: auto; border: 1px solid black; margin-top: 20px;"></div>
+  <div id="chat-box" style="height: 300px; overflow: auto; border: 1px solid black; margin-top: 20px; display: none;"></div>
 
   <form id="message-form" style="margin-top: 20px;">
     <input type="text" id="message" disabled>
     <button type="submit" disabled>Send</button>
   </form>
+</div>
 
   <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const startGameButton = document.querySelector('#start-game');
+        const lobbyDiv = document.querySelector('#lobbydiv');
+        const gameDiv = document.querySelector('#gamediv');
+      
+        // Hide the gameDiv by default
+        gameDiv.style.display = 'none';
+      
+        startGameButton.addEventListener('click', () => {
+          // Hide the lobby and show the game when the button is clicked
+          lobbyDiv.style.display = 'none';
+          gameDiv.style.display = 'block';
+        });
+      });
+      
     const nicknameForm = document.querySelector('#nickname-form');
     const gameIdForm = document.querySelector('#gameid-form');
     const messageForm = document.querySelector('#message-form');
@@ -58,6 +80,7 @@
       
         document.getElementById('message').disabled = false;
         document.querySelector('#message-form button').disabled = false;
+        document.getElementById('chat-box').style.display = 'block';
       
         conn.on('data', (data) => {
           const messageElement = document.createElement('p');
@@ -67,6 +90,7 @@
         });
       });
       window.nickname = nickname;
+      document.getElementById('join-game').disabled = false;
     });
 
     gameIdForm.addEventListener('submit', function(event) {
@@ -82,6 +106,7 @@
                 conn.send(`${window.nickname} has joined the game`);
                 document.getElementById('message').disabled = false;
                 document.querySelector('#message-form button').disabled = false;
+                document.getElementById('chat-box').style.display = 'block';
             });
     
             conn.on('data', (data) => {
