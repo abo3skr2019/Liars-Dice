@@ -1,38 +1,48 @@
-/* CSS */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+form input[type="text"] {
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+}
+
 #chat-box {
-    height: 300px;
-    overflow: auto;
-    border: 1px solid black;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f0f0f0;
-  }
-  
-  #chat-box p {
-    padding: 5px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  #message-form {
-    margin-top: 20px;
-  }
-  
-  .sent-message {
-    background-color: #d1e7dd;
-    align-self: flex-end;
-    order: 1;
-  }
-  
-  .received-message {
-    background-color: #fff3cd;
-  }
-  #peer-id {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-  }
+  width: 80%;
+  height: 300px;
+  overflow: auto;
+  border: 1px solid black;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.sent-message {
+  color: blue;
+}
