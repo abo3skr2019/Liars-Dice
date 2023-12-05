@@ -33,6 +33,11 @@ form button {
   color: #fff;
 }
 
+button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}
+
 #chat-box {
   width: 80%;
   height: 300px;
@@ -41,6 +46,7 @@ form button {
   margin: 20px auto;
   padding: 10px;
   background-color: #fff;
+  display: none;
 }
 
 .sent-message {

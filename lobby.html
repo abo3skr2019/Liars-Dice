@@ -28,7 +28,7 @@
     <button id="join-game" disabled>Join Game</button>
   </form>
 
-  <div id="chat-box" style="height: 300px; overflow: auto; border: 1px solid black; margin-top: 20px; display: none;"></div>
+  <div id="chat-box"></div>
 
   <form id="message-form" style="margin-top: 20px;">
     <input type="text" id="message" disabled>
@@ -37,10 +37,13 @@
 </div>
 
   <script>
+    let nickname;
+    const peerIdElement = document.querySelector('#peer-id');
     document.addEventListener('DOMContentLoaded', (event) => {
         const startGameButton = document.querySelector('#start-game');
         const lobbyDiv = document.querySelector('#lobbydiv');
         const gameDiv = document.querySelector('#gamediv');
+        
       
         // Hide the gameDiv by default
         gameDiv.style.display = 'none';
@@ -50,20 +53,29 @@
           lobbyDiv.style.display = 'none';
           gameDiv.style.display = 'block';
         });
-      });
+
+        peerIdElement.addEventListener('click', () => {
+            navigator.clipboard.writeText(peerIdElement.textContent)
+              .then(() => {
+                console.log(`Peer ID copied to clipboard: ${peerIdElement.textContent}`);
+              })
+              .catch(err => {
+                console.error('Could not copy text: ', err);
+              });
+          });
+        });
       
     const nicknameForm = document.querySelector('#nickname-form');
     const gameIdForm = document.querySelector('#gameid-form');
     const messageForm = document.querySelector('#message-form');
     const chatBox = document.querySelector('#chat-box');
-    const peerIdElement = document.querySelector('#peer-id');
     let peer, conn;
 
     nicknameForm.addEventListener('submit', function(event) {
       event.preventDefault();
 
-      const nicknameInput = document.getElementById('nickname');
-      const nickname = nicknameInput.value;
+        const nicknameInput = document.getElementById('nickname');
+        nickname = nicknameInput.value;
 
       peer = new Peer();
 
@@ -89,7 +101,6 @@
           chatBox.scrollTop = chatBox.scrollHeight;
         });
       });
-      window.nickname = nickname;
       document.getElementById('join-game').disabled = false;
     });
 
@@ -103,7 +114,7 @@
             conn = peer.connect(gameId);
     
             conn.on('open', () => {
-                conn.send(`${window.nickname} has joined the game`);
+                conn.send(`${nickname} has joined the game`);
                 document.getElementById('message').disabled = false;
                 document.querySelector('#message-form button').disabled = false;
                 document.getElementById('chat-box').style.display = 'block';
@@ -126,10 +137,9 @@
   
     const messageInput = document.getElementById('message');
     const message = messageInput.value;
-    const nickname = window.nickname;
   
     if (conn) { // Check if conn is defined
-        conn.send(`${nickname} : ${message}`);
+        conn.send(`${nickname}: ${message}`);
     
         const messageElement = document.createElement('p');
         messageElement.textContent = `You: ${message}`;
