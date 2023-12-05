@@ -97,9 +97,10 @@
   
     const messageInput = document.getElementById('message');
     const message = messageInput.value;
+    const nickname = window.nickname;
   
     if (conn) { // Check if conn is defined
-        conn.send("${window.nickname} : ${message}");
+        conn.send("${nickname} : ${message}");
     
         const messageElement = document.createElement('p');
         messageElement.textContent = `You: ${message}`;
