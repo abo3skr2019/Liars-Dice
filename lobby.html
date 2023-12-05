@@ -87,12 +87,12 @@
     
       const nicknameInput = document.getElementById("nickname");
       nickname = nicknameInput.value;
-      if (nickname && /^[a-zA-Z0-9]+$/.test(nickname)) {
+      if (nickname.trim() !== "" && /^[a-zA-Z0-9]+$/.test(nickname)) {
         peer = new Peer();
     
         peer.on("open", (id) => {
           console.log("Connected with ID:", id);
-          peerIdElement.textContent = `Peer ID: ${id}`; // Update the peer id div
+          peerIdElement.textContent = `Game ID: ${id}`; // Update the peer id div
         });
     
         peer.on("error", (error) => {
@@ -128,7 +128,7 @@
       const gameIdInput = document.getElementById("gameid");
       const gameId = gameIdInput.value;
     
-      if (gameId) {
+      if (gameId.trim() !== "") {
         conn = peer.connect(gameId);
     
         conn.on("open", () => {
@@ -145,6 +145,9 @@
           chatBox.scrollTop = chatBox.scrollHeight;
         });
       } else {
+        alert(
+          "Invalid GameID. Please enter a GameID that contains only letters and numbers."
+        );
         console.error("Game ID is required to connect.");
       }
     });
