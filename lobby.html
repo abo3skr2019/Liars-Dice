@@ -74,20 +74,21 @@
         if (gameId) {
             conn = peer.connect(gameId);
     
-            // Wait for the connection to open before sending a message
             conn.on('open', () => {
                 conn.send(`${window.nickname} has joined the game`);
                 document.getElementById('message').disabled = false;
                 document.querySelector('#message-form button').disabled = false;
             });
-        }
     
-        conn.on('data', (data) => {
-          const messageElement = document.createElement('p');
-          messageElement.textContent = data;
-          chatBox.appendChild(messageElement);
-          chatBox.scrollTop = chatBox.scrollHeight;
-        });
+            conn.on('data', (data) => {
+                const messageElement = document.createElement('p');
+                messageElement.textContent = data;
+                chatBox.appendChild(messageElement);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            });
+        } else {
+            console.error('Game ID is required to connect.');
+        }
     });
 
 // JavaScript
