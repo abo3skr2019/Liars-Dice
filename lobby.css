@@ -40,7 +40,14 @@ form button {
 
 #chat-box {
   flex: 3; /* This will take 3/4 of the space */
-  /* Add other styles as needed */
+  width: 80%;
+  height: 300px;
+  overflow: auto;
+  border: 1px solid black;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #fff;
+  display: none;
 }
 
 #start-game {
@@ -61,17 +68,6 @@ form button {
 button:disabled {
   background-color: #888;
   cursor: not-allowed;
-}
-
-#chat-box {
-  width: 80%;
-  height: 300px;
-  overflow: auto;
-  border: 1px solid black;
-  margin: 20px auto;
-  padding: 10px;
-  background-color: #fff;
-  display: none;
 }
 #peer-id {
   user-select: none;
