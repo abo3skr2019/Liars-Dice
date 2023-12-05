@@ -1,0 +1,29 @@
+/* CSS */
+#chat-box {
+    height: 300px;
+    overflow: auto;
+    border: 1px solid black;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  #chat-box p {
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  #message-form {
+    margin-top: 20px;
+  }
+  
+  .sent-message {
+    background-color: #d1e7dd;
+    align-self: flex-end;
+    order: 1;
+  }
+  
+  .received-message {
+    background-color: #fff3cd;
+  }

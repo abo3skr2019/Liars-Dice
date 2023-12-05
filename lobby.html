@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Lobby</title>
+  <script src="https://unpkg.com/peerjs@1.5.1/dist/peerjs.min.js"></script>
+  <link rel="stylesheet" href="lobby.css"> <!-- Add this line -->
+</head>
+<body>
+  <h1>Lobby</h1>
+  
+  <form id="nickname-form">
+    <label for="nickname">Enter your nickname:</label>
+    <input type="text" id="nickname" name="nickname" required>
+    <button type="submit">Set Nickname</button>
+  </form>
+
+  <form id="gameid-form">
+    <label for="gameid">Enter game ID:</label>
+    <input type="text" id="gameid" name="gameid" required>
+    <button type="submit">Join Game</button>
+  </form>
+
+  <div id="chat-box" style="height: 300px; overflow: auto; border: 1px solid black; margin-top: 20px;"></div>
+
+  <form id="message-form" style="margin-top: 20px;">
+    <input type="text" id="message" disabled>
+    <button type="submit" disabled>Send</button>
+  </form>
+
+  <script>
+    const nicknameForm = document.querySelector('#nickname-form');
+    const gameIdForm = document.querySelector('#gameid-form');
+    const messageForm = document.querySelector('#message-form');
+    const chatBox = document.querySelector('#chat-box');
+    let peer, conn;
+
+    nicknameForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nicknameInput = document.getElementById('nickname');
+      const nickname = nicknameInput.value;
+
+      peer = new Peer(nickname, { debug: 2 });
+
+      peer.on('open', (id) => {
+        console.log('Connected with ID:', id);
+      });
+
+      peer.on('error', (error) => {
+        console.error('PeerJS error:', error);
+      });
+      window.nickname = nickname;
+    });
+
+    gameIdForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+      
+        const gameIdInput = document.getElementById('gameid');
+        const gameId = gameIdInput.value;
+      
+        if (gameId) {
+            conn = peer.connect(gameId);
+            conn.send(`${window.nickname} has joined the game`);
+            document.getElementById('message').disabled = false;
+            document.querySelector('#message-form button').disabled = false;
+        }
+      
+        conn.on('data', (data) => {
+          const messageElement = document.createElement('p');
+          messageElement.textContent = data;
+          chatBox.appendChild(messageElement);
+          chatBox.scrollTop = chatBox.scrollHeight;
+        });
+      });
+
+// JavaScript
+    messageForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+  
+    const messageInput = document.getElementById('message');
+    const message = messageInput.value;
+  
+    if (conn) { // Check if conn is defined
+        conn.send(message);
+    
+        const messageElement = document.createElement('p');
+        messageElement.textContent = `You: ${message}`;
+        messageElement.classList.add('sent-message'); // Add class
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      } else {
+        console.error('Connection not established. Please enter a game ID first.');
+      }
+    messageInput.value = '';
+  });
+  
+  </script>
+</body>
+</html>
