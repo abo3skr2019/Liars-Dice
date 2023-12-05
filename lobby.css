@@ -27,3 +27,12 @@
   .received-message {
     background-color: #fff3cd;
   }
+  #peer-id {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }

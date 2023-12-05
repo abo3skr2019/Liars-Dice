@@ -7,7 +7,9 @@
 </head>
 <body>
   <h1>Lobby</h1>
-  
+
+  <div id="peer-id"></div>
+
   <form id="nickname-form">
     <label for="nickname">Enter your nickname:</label>
     <input type="text" id="nickname" name="nickname" required>
@@ -32,6 +34,7 @@
     const gameIdForm = document.querySelector('#gameid-form');
     const messageForm = document.querySelector('#message-form');
     const chatBox = document.querySelector('#chat-box');
+    const peerIdElement = document.querySelector('#peer-id');
     let peer, conn;
 
     nicknameForm.addEventListener('submit', function(event) {
@@ -40,10 +43,11 @@
       const nicknameInput = document.getElementById('nickname');
       const nickname = nicknameInput.value;
 
-      peer = new Peer(nickname, { debug: 2 });
+      peer = new Peer();
 
       peer.on('open', (id) => {
         console.log('Connected with ID:', id);
+        peerIdElement.textContent = `Peer ID: ${id}`; // Update the peer id div
       });
 
       peer.on('error', (error) => {
