@@ -54,10 +54,10 @@
 
     gameIdForm.addEventListener('submit', function(event) {
         event.preventDefault();
-      
+    
         const gameIdInput = document.getElementById('gameid');
         const gameId = gameIdInput.value;
-      
+    
         if (gameId) {
             conn = peer.connect(gameId);
     
@@ -68,7 +68,7 @@
                 document.querySelector('#message-form button').disabled = false;
             });
         }
-      
+    
         conn.on('data', (data) => {
           const messageElement = document.createElement('p');
           messageElement.textContent = data;
