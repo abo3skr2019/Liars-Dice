@@ -20,16 +20,16 @@
     <button type="submit">Set Nickname</button>
   </form>
 
-  <button id="start-game">Start Game</button>
-
   <form id="gameid-form">
     <label for="gameid">Enter game ID:</label>
     <input type="text" id="gameid" name="gameid" required disabled>
     <button id="join-game" disabled>Join Game</button>
   </form>
 
-  <div id="chat-box"></div>
-
+  <div id="chat-and-button-container">
+    <div id="chat-box"></div>
+    <button id="start-game" disabled>Start Game</button>
+  </div>
   <form id="message-form" style="margin-top: 20px;">
     <input type="text" id="message" disabled>
     <button type="submit" disabled>Send</button>
@@ -64,12 +64,11 @@
       });
     
       peerIdElement.addEventListener("click", () => {
+        const peerId = peerIdElement.textContent.split(":")[1].trim();
         navigator.clipboard
-          .writeText(peerIdElement.textContent)
+          .writeText(peerId)
           .then(() => {
-            console.log(
-              `Peer ID copied to clipboard: ${peerIdElement.textContent}`
-            );
+            console.log(`Peer ID copied to clipboard: ${peerId}`);
           })
           .catch((err) => {
             console.error("Could not copy text: ", err);
@@ -105,6 +104,7 @@
           document.getElementById("message").disabled = false;
           document.querySelector("#message-form button").disabled = false;
           document.getElementById("chat-box").style.display = "block";
+          document.getElementById("start-game").disabled = false;
     
           conn.on("data", (data) => {
             const messageElement = document.createElement("p");

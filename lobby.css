@@ -33,6 +33,31 @@ form button {
   color: #fff;
 }
 
+#chat-and-button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#chat-box {
+  flex: 3; /* This will take 3/4 of the space */
+  /* Add other styles as needed */
+}
+
+#start-game {
+  flex: .1; /* This will take 1/4 of the space */
+  margin: auto;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 5px 10px; /* Same padding as form button */
+  border-radius: 5px; /* Same border-radius as form button */
+  font-size: 1.5em;
+}
+
+#start-game:enabled:hover {
+  background-color: green;
+}
+
 button:disabled {
   background-color: #888;
   cursor: not-allowed;
@@ -48,7 +73,9 @@ button:disabled {
   background-color: #fff;
   display: none;
 }
-
+#peer-id {
+  user-select: none;
+}
 .sent-message {
   color: blue;
 }
