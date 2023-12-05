@@ -163,11 +163,11 @@
         // Check if conn is defined
         if(message.trim() !== "")
         {
-            conn.send(`${nickname}: ${message}`);
+          conn.send(`${nickname}: ${message}`);
         }
     
         const messageElement = document.createElement("p");
-        if (message.trim() === "")
+        if (message.trim() !== "")
          {
           messageElement.textContent = `You: ${message}`;
         }
