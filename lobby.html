@@ -49,6 +49,19 @@
       peer.on('error', (error) => {
         console.error('PeerJS error:', error);
       });
+      peer.on('connection', (connection) => {
+        conn = connection;
+      
+        document.getElementById('message').disabled = false;
+        document.querySelector('#message-form button').disabled = false;
+      
+        conn.on('data', (data) => {
+          const messageElement = document.createElement('p');
+          messageElement.textContent = data;
+          chatBox.appendChild(messageElement);
+          chatBox.scrollTop = chatBox.scrollHeight;
+        });
+      });
       window.nickname = nickname;
     });
 
