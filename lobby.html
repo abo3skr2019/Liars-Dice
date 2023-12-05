@@ -158,7 +158,8 @@
     
       if (conn) {
         // Check if conn is defined
-        if(message.trim() !== ""){
+        if(message.trim() !== "")
+        {
             conn.send(`${nickname}: ${message}`);
         }
     
