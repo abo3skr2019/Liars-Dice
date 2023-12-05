@@ -60,9 +60,13 @@
       
         if (gameId) {
             conn = peer.connect(gameId);
-            conn.send(`${window.nickname} has joined the game`);
-            document.getElementById('message').disabled = false;
-            document.querySelector('#message-form button').disabled = false;
+    
+            // Wait for the connection to open before sending a message
+            conn.on('open', () => {
+                conn.send(`${window.nickname} has joined the game`);
+                document.getElementById('message').disabled = false;
+                document.querySelector('#message-form button').disabled = false;
+            });
         }
       
         conn.on('data', (data) => {
@@ -71,7 +75,7 @@
           chatBox.appendChild(messageElement);
           chatBox.scrollTop = chatBox.scrollHeight;
         });
-      });
+    });
 
 // JavaScript
     messageForm.addEventListener('submit', function(event) {
