@@ -1,101 +1,38 @@
-body {
-  background-color: #000000; /* Black */
-  color: #FFFFFF; /* White */
-  body {
-    background-color: #000000; /* Black */
-    color: #FFFFFF; /* White */
-    font-family: 'Pirate One', cursive;
-  }
-  
-  h1 {
-    color: #FFD700; /* Gold */
-  }
-  
-  #peer-id {
-    color: #FFD700; /* Gold */
-    margin-bottom: 20px;
-  }
-  
-  form {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    color: #FFD700; /* Gold */
-  }
-  
-  input[type="text"] {
-    color: #000000; /* Black */
-    background-color: #FFFFFF; /* White */
-    border: 2px solid #FFD700; /* Gold */
-  }
-  
-  button {
-    background-color: #FF0000; /* Red */
-    color: #FFFFFF; /* White */
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-  }
-  
-  #chat-box {
-    background-color: #FFFFFF; /* White */
-    color: #000000; /* Black */
+/* CSS */
+#chat-box {
+    height: 300px;
+    overflow: auto;
+    border: 1px solid black;
+    margin-top: 20px;
     padding: 10px;
-    font-family: 'MedievalSharp', cursive;
+    background-color: #f0f0f0;
+  }
+  
+  #chat-box p {
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  #message-form {
+    margin-top: 20px;
   }
   
   .sent-message {
-    color: #FF0000; /* Red */
-  }}
-
-h1 {
-  color: #FFD700; /* Gold */
-}
-
-#peer-id {
-  color: #FFD700; /* Gold */
-  margin-bottom: 20px;
-}
-
-form {
-  margin-bottom: 20px;
-}
-
-label {
-  color: #FFD700; /* Gold */
-}
-
-input[type="text"] {
-  color: #000000; /* Black */
-  background-color: #FFFFFF; /* White */
-  border: 2px solid #FFD700; /* Gold */
-}
-
-button {
-  background-color: #FF0000; /* Red */
-  color: #FFFFFF; /* White */
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-#chat-box {
-  background-color: #FFFFFF; /* White */
-  color: #000000; /* Black */
-  padding: 10px;
-}
-
-.sent-message {
-  color: #FF0000; /* Red */
-}
+    background-color: #d1e7dd;
+    align-self: flex-end;
+    order: 1;
+  }
+  
+  .received-message {
+    background-color: #fff3cd;
+  }
+  #peer-id {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }
