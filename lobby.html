@@ -167,7 +167,10 @@
         }
     
         const messageElement = document.createElement("p");
-        messageElement.textContent = `You: ${message}`;
+        if (message.trim() === "")
+         {
+          messageElement.textContent = `You: ${message}`;
+        }
         messageElement.classList.add("sent-message"); // Add class
         chatBox.appendChild(messageElement);
         chatBox.scrollTop = chatBox.scrollHeight;
