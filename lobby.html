@@ -6,8 +6,15 @@
   <link rel="stylesheet" href="lobby.css">
 </head>
 <body>
-<div id="gamediv">
+  <div id="gamediv">
     <h1>Game</h1>
+    <div id="chat-and-button-container">
+      <div id="chat-box"></div>
+    </div>
+    <form id="message-form" style="margin-top: 20px;">
+      <input type="text" id="message">
+      <button type="submit">Send</button>
+    </form>
 </div>
 <div id = "lobbydiv">
   <h1>Lobby</h1>
@@ -179,6 +186,7 @@
       }
       messageInput.value = "";
     });    
+    
   </script>
 </body>
 </html>
